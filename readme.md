@@ -31,8 +31,8 @@ HOST=$(oc get route default-route -n openshift-image-registry --template='{{ .sp
 
 Faça o push da imagem para o registry, no exemplo estou sando o registry do próprio OpenShift:
 ```bash
-podman tag ocpcustom $HOST/openshift/jboss-eap74-openjdk11-openshift-custom
 podman login -u kubeadmin -p $(oc whoami -t) $HOST
+podman tag jboss-74-custom $HOST/openshift/jboss-eap74-openjdk11-openshift-custom
 podman push $HOST/openshift/jboss-eap74-openjdk11-openshift-custom
 ```
 
@@ -41,5 +41,16 @@ faça a criação do image stream customizado:
 cat image-stream-custom.yaml  | sed -e "s/registry.redhat.io\/jboss-eap-7\/eap74-openjdk11-openshift-rhel8/$HOST\/openshift\/jboss-eap74-openjdk11-openshift-custom/" | oc apply -f -
 ```
 
+Execução de um build usando o image stream customizado:
+
+```bash
+oc new-project demo
+oc delete bc app-demo
+oc new-build jboss-eap74-openjdk11-openshift-custom:latest~https://github.com/mycloudlab/jboss-eap74-openshift-with-rhsso-adapter#main \
+--env=CUSTOM_INSTALL_DIRECTORIES="/custom" \
+--context-dir app-demo \
+--name=app-demo
+```
 
 
+oc new-app --name=app-demo app-demo 
