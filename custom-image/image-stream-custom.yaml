@@ -1,0 +1,50 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/display-name: JBoss EAP 7.4.0 with OpenJDK 11 - custom
+    version: 7.4.0
+  name: jboss-eap74-openjdk11-openshift-custom
+  namespace: openshift
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - annotations:
+      description: The latest available build of JBoss EAP 7.4.0 with OpenJDK 11 customized with RHSSO adapter
+      iconClass: icon-eap
+      openshift.io/display-name: JBoss EAP 7.4.0 with OpenJDK11 customized with RHSSO adapter
+      sampleContextDir: kitchensink
+      sampleRef: 7.4.x
+      sampleRepo: https://github.com/jbossas/eap-quickstarts/
+      supports: eap:7.4.0,javaee:8,java:11
+      tags: builder,eap,javaee,java,jboss,hidden
+      version: latest
+    from:
+      kind: DockerImage
+      name: registry.redhat.io/jboss-eap-7/eap74-openjdk11-openshift-rhel8
+    generation: 2
+    importPolicy:
+      importMode: Legacy
+    name: 7.4.0
+    referencePolicy:
+      type: Local
+  - annotations:
+      description: The latest available build of JBoss EAP 7.4 with OpenJDK 11 customized with RHSSO adapter
+      iconClass: icon-eap
+      openshift.io/display-name: JBoss EAP 7.4 with OpenJDK11 customized with RHSSO adapter
+      sampleContextDir: kitchensink
+      sampleRef: 7.4.x
+      sampleRepo: https://github.com/jbossas/eap-quickstarts/
+      supports: eap:7.4,javaee:8,java:11
+      tags: builder,eap,javaee,java,jboss,hidden
+      version: latest
+    from:
+      kind: DockerImage
+      name: registry.redhat.io/jboss-eap-7/eap74-openjdk11-openshift-rhel8:latest
+    generation: 2
+    importPolicy:
+      importMode: Legacy
+    name: latest
+    referencePolicy:
+      type: Local
