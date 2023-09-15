@@ -4,12 +4,20 @@ Este repositório demonstra como customizar o JBoss para incluir na imagem da Re
 
 A customização empregada aqui é uma feita via dockerfile.
 
-A imagem customizada encontra-se na pasta `custom-image`. O build dela pode ser feito usando o comando:
+A imagem customizada encontra-se na pasta `custom-image`. São fornecidos duas formas de customizar, uma é feita no build da imagem, já configurando o JBoss com as opções desejadas, e outra é feita usando o (postconfigure)[https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#custom_scripts].
 
+O build da imagem pré configurada pode ser feito usando o comando abaixo:
  ```bash
  cd custom-image
- podman build . -t jboss-74-custom
+ podman build -f config-in-image.Dockerfile . -t jboss-74-custom
  ```
+
+O build da imagem usando customização usando o método de postconfigure, pode ser feito usando o comando abaixo:
+```bash
+ cd custom-image
+ podman build -f config-in-postconfigure.Dockerfile . -t jboss-74-custom
+ ```
+
 
 Obtivemos o patch mais recente do adaptador RHSSO para o JBoss EAP 7.x disponível no site [Red Hat Single Sign-On 7.6.5 Client Adapter for JBoss EAP 7](https://access.redhat.com/jbossnetwork/restricted/softwareDetail.html?softwareId=105638&product=core.service.rhsso&version=7.6&downloadType=patches)
 
@@ -47,10 +55,11 @@ Execução de um build usando o image stream customizado:
 oc new-project demo
 oc delete bc app-demo
 oc new-build jboss-eap74-openjdk11-openshift-custom:latest~https://github.com/mycloudlab/jboss-eap74-openshift-with-rhsso-adapter#main \
---env=CUSTOM_INSTALL_DIRECTORIES="/custom" \
 --context-dir app-demo \
 --name=app-demo
 ```
 
 
 oc new-app --name=app-demo app-demo 
+
+oc expose app-demo
