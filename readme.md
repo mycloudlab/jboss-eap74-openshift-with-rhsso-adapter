@@ -15,7 +15,7 @@ A Red Hat disponibiliza uma imagem s2i para execução do JBoss EAP sob o OpenSh
 ### Customização via projeto
 
 
-A customização via projeto é feita colocando os scripts de configuração diretamente no repositório da aplicação, conforme apontado na (documentação)[https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html/getting_started_with_jboss_eap_for_openshift_container_platform/configuring_eap_openshift_image#s2i_modules_drivers_deployments]
+A customização via projeto é feita colocando os scripts de configuração diretamente no repositório da aplicação, conforme apontado na [documentação](https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html/getting_started_with_jboss_eap_for_openshift_container_platform/configuring_eap_openshift_image#s2i_modules_drivers_deployments)
 
 #### Funcionamento
 
@@ -110,7 +110,7 @@ O build da imagem pré configurada pode ser feito usando o comando abaixo:
 
 Neste ponto temos uma imagem JBoss EAP 7.4 customizado, para utilizar ela no OpenShift a imagem deve ser disponibilizada em um registry e aplicada no processo de build por um ImageStream customizado. O imageStream encontra-se em `custom-image/image-stream-custom.yaml`.
 
-Para simplificar a demonstração do funcionamento das customizações usamos neste exemplo o registry interno do OpenShift, portanto realizamos a exposição do registry do openshift para upload da imagem customizada, conforme orientação da [documentação](https://docs.openshift.com/container-platform/4.12/registry/securing-exposing-registry.html)
+Para simplificar a demonstração do funcionamento das customizações usamos neste exemplo o registry interno do OpenShift, portanto realizamos a exposição do registry do openshift para upload da imagem customizada, conforme orientação da [documentação](https://docs.openshift.com/container-platform/4.12/registry/securing-exposing-registry.html).
 
 ```bash
 oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
@@ -164,13 +164,13 @@ Contras dessa abordagem:
 
 ### Customização via script postconfigure.sh
 
-Outra forma de fazer a customização é usando a abordagem de configuração em tempo de runtime, fornecendo na imagem um script de postconfigure.sh, esta abordagem é fornecida na (documentação)[https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#custom_scripts].
+Outra forma de fazer a customização é usando a abordagem de configuração em tempo de runtime, fornecendo na imagem um script de postconfigure.sh, esta abordagem é fornecida na [documentação](https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#custom_scripts).
 
 #### Funcionamento
 
 A configuração aqui também e feita via utilização de uma imagem customizada, na imagem fornecemos os arquivos de configuração necessários e colocamos o script postconfigure.sh na pasta `/opt/eap/extensions`, o script postconfigure.sh é um gancho que é executado antes de inicializar a aplicação, fornecendo um método conveniente para ajustes do JBoss antes da execução da aplicação.
 
-Neste exemplo a customização envolve a configuração do adaptador do RHSSO no JBoss usando o projeto do elytron, para isso obtivemos o patch mais recente do adaptador RHSSO para o JBoss EAP 7.x disponível no site [Red Hat Single Sign-On 7.6.5 Client Adapter for JBoss EAP 7](https://access.redhat.com/jbossnetwork/restricted/softwareDetail.html?softwareId=105638&product=core.service.rhsso&version=7.6&downloadType=patches)
+Neste exemplo a customização envolve a configuração do adaptador do RHSSO no JBoss usando o projeto do elytron, para isso obtivemos o patch mais recente do adaptador RHSSO para o JBoss EAP 7.x disponível no site [Red Hat Single Sign-On 7.6.5 Client Adapter for JBoss EAP 7](https://access.redhat.com/jbossnetwork/restricted/softwareDetail.html?softwareId=105638&product=core.service.rhsso&version=7.6&downloadType=patches).
 
 A imagem customizada encontra-se em `custom-image/config-in-image.Dockerfile`. 
 
@@ -205,7 +205,7 @@ O build da imagem usando customização usando o método de postconfigure, pode 
 
 Neste ponto temos uma imagem JBoss EAP 7.4 customizado, para utilizar ela no OpenShift a imagem deve ser disponibilizada em um registry e aplicada no processo de build por um ImageStream customizado. O imageStream encontra-se em `custom-image/image-stream-custom.yaml`.
 
-Para simplificar a demonstração do funcionamento das customizações usamos neste exemplo o registry interno do OpenShift, portanto realizamos a exposição do registry do openshift para upload da imagem customizada, conforme orientação da [documentação](https://docs.openshift.com/container-platform/4.12/registry/securing-exposing-registry.html)
+Para simplificar a demonstração do funcionamento das customizações usamos neste exemplo o registry interno do OpenShift, portanto realizamos a exposição do registry do openshift para upload da imagem customizada, conforme orientação da [documentação](https://docs.openshift.com/container-platform/4.12/registry/securing-exposing-registry.html).
 
 ```bash
 oc patch configs.imageregistry.operator.openshift.io/cluster --patch '{"spec":{"defaultRoute":true}}' --type=merge
