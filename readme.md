@@ -15,7 +15,7 @@ A Red Hat disponibiliza uma imagem s2i para execução do JBoss EAP sob o OpenSh
 ### Customização via projeto
 
 
-A customização via projeto é feita colocando os scripts de configuração diretamente no repositório da aplicação, conforme apontado na [documentação](https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html/getting_started_with_jboss_eap_for_openshift_container_platform/configuring_eap_openshift_image#s2i_modules_drivers_deployments)
+A customização via projeto é feita colocando os scripts de configuração diretamente no repositório da aplicação, conforme apontado na [documentação](https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html/getting_started_with_jboss_eap_for_openshift_container_platform/configuring_eap_openshift_image#s2i_modules_drivers_deployments).
 
 #### Funcionamento
 
